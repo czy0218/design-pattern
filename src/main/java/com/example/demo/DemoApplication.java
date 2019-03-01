@@ -88,7 +88,22 @@ public class DemoApplication {
         stringListMap1.forEach((v, k) -> {
             System.out.println(v + "====" + k);
         });
+        System.out.println("========================全都分配");
+        List<String> users2 = new ArrayList<>();
+        users2.add("a");
+        users2.add("b");
 
+
+        List<String> tasks2 = new ArrayList<>();
+        tasks2.add("1");
+        tasks2.add("2");
+        tasks2.add("3");
+        tasks2.add("4");
+        Map<String, List<String>> map = Distribution.allotOfAll(users2, tasks2);
+
+        map.forEach((k, v) -> {
+            System.out.println(k + "====" + v);
+        });
 
         System.out.println("========================平均分配");
         List<String> users = new ArrayList<String>();
@@ -124,22 +139,56 @@ public class DemoApplication {
             System.out.println(k + "==========" + v);
         });
 
-
-        System.out.println("========================全都分配");
-        List<String> users2 = new ArrayList<>();
-        users2.add("1");
-        users2.add("2");
-        users2.add("3");
-        List<String> tasks2 = new ArrayList<>();
-        tasks2.add("a");
-        tasks2.add("b");
-        tasks2.add("c");
-        Map<String, List<String>> map = Distribution.allotOfAll(users2, tasks2);
-
-        map.forEach((v, k) -> {
-            System.out.println(v + "====" + k);
+        System.out.println("========================按批量平均分配");
+        List<String> users3 = new ArrayList<String>();
+        users3.add("a");
+        users3.add("b");
+        users3.add("c");
+        users3.add("d");
+        users3.add("e");
+        List<List<String>> tasksList = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        List<String> list1 = new ArrayList<>();
+        list1.add("5");
+        list1.add("6");
+        list1.add("7");
+        list1.add("8");
+        tasksList.add(list);
+        tasksList.add(list1);
+        Map<String, List<String>> map1 = Distribution.allotOfAverage1(users3, tasksList);
+        map1.forEach((k, v) -> {
+            System.out.println(k + "=======" + v);
         });
 
+        System.out.println("========================批量按分组平均分配");
+
+        List<String> users4 = new ArrayList<>();
+        users4.add("a");
+        users4.add("b");
+        users4.add("c");
+        users4.add("d");
+        users4.add("e");
+
+        List<String> tasks3 = new ArrayList<>();
+        tasks3.add("1");
+        tasks3.add("2");
+        tasks3.add("3");
+        tasks3.add("4");
+
+        tasks3.add("5");
+        tasks3.add("6");
+        tasks3.add("7");
+        tasks3.add("8");
+
+
+        Map<String, List<String>> map2 = Distribution.allotOfAverage(users4, Distribution.getTasks(tasks3));
+        map2.forEach((k, v) -> {
+            System.out.println(k + "====" + v);
+        });
     }
 
 }

@@ -55,6 +55,41 @@ public class Distribution {
     }
 
     /*
+     * 按批量平均分配
+     */
+    public static Map<String, List<String>> allotOfAverage1(List<String> users, List<List<String>> tasksList) {
+        Map<String, List<String>> allot = new ConcurrentHashMap<String, List<String>>(); //保存分配的信息
+
+        if (users != null && users.size() > 0 && tasksList != null && tasksList.size() > 0) {
+            for (int i = 0; i < tasksList.size(); i++) {
+                if (tasksList.get(i) != null && tasksList.get(i).size() > 0) {
+                    int j = i % users.size();
+                    if (allot.containsKey(users.get(j))) {
+                        List<String> list = allot.get(users.get(j));
+                        tasksList.get(i).forEach(v -> list.add(v));
+                        allot.put(users.get(j), list);
+                    } else {
+                        List<String> list = new ArrayList<String>();
+                        tasksList.get(i).forEach(v -> list.add(v));
+                        allot.put(users.get(j), list);
+                    }
+                }
+            }
+        }
+        return allot;
+    }
+
+    public static List<String> getTasks(List<String> list) {
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < 3; j++) {
+                stringList.add(list.get(i));
+            }
+        }
+        return stringList;
+    }
+
+    /*
      * 权重分配
      */
     public static Map<String, List<String>> allotOfProportion(Map<String, String> users, List<String> tasks) {
@@ -80,8 +115,8 @@ public class Distribution {
     }
 
     /*
-    * 全部分配
-    * */
+     * 全部分配
+     * */
     public static Map<String, List<String>> allotOfAll(List<String> users, List<String> tasks) {
         Map<String, List<String>> map = new ConcurrentHashMap<String, List<String>>();
         users.forEach(v -> {
