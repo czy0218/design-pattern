@@ -31,29 +31,6 @@ public class Distribution {
         }
         return allot;
     }
-
-    /*
-     * 平均分配
-     */
-    public static Map<String, List<String>> allotOfAverage(List<String> users, List<String> tasks) {
-        Map<String, List<String>> allot = new ConcurrentHashMap<String, List<String>>(); //保存分配的信息
-        if (users != null && users.size() > 0 && tasks != null && tasks.size() > 0) {
-            for (int i = 0; i < tasks.size(); i++) {
-                int j = i % users.size();
-                if (allot.containsKey(users.get(j))) {
-                    List<String> list = allot.get(users.get(j));
-                    list.add(tasks.get(i));
-                    allot.put(users.get(j), list);
-                } else {
-                    List<String> list = new ArrayList<String>();
-                    list.add(tasks.get(i));
-                    allot.put(users.get(j), list);
-                }
-            }
-        }
-        return allot;
-    }
-
     /*
      * 按批量平均分配
      */
@@ -78,17 +55,6 @@ public class Distribution {
         }
         return allot;
     }
-
-    public static List<String> getTasks(List<String> list) {
-        List<String> stringList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < 3; j++) {
-                stringList.add(list.get(i));
-            }
-        }
-        return stringList;
-    }
-
     /*
      * 权重分配
      */
@@ -112,6 +78,38 @@ public class Distribution {
             }
         }
         return allot;
+    }
+
+
+    /*
+     * 平均分配
+     */
+    public static Map<String, List<String>> allotOfAverage(List<String> users, List<String> tasks) {
+        Map<String, List<String>> allot = new ConcurrentHashMap<String, List<String>>(); //保存分配的信息
+        if (users != null && users.size() > 0 && tasks != null && tasks.size() > 0) {
+            for (int i = 0; i < tasks.size(); i++) {
+                int j = i % users.size();
+                if (allot.containsKey(users.get(j))) {
+                    List<String> list = allot.get(users.get(j));
+                    list.add(tasks.get(i));
+                    allot.put(users.get(j), list);
+                } else {
+                    List<String> list = new ArrayList<String>();
+                    list.add(tasks.get(i));
+                    allot.put(users.get(j), list);
+                }
+            }
+        }
+        return allot;
+    }
+    public static List<String> getTasks(List<String> list) {
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < 3; j++) {
+                stringList.add(list.get(i));
+            }
+        }
+        return stringList;
     }
 
     /*
