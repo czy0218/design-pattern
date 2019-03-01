@@ -13,10 +13,7 @@ import com.example.demo.proxy.Zhongji;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -164,7 +161,7 @@ public class DemoApplication {
             System.out.println(k + "=======" + v);
         });
 
-        System.out.println("========================批量按分组平均分配");
+        System.out.println("========================按分组平均分配");
 
         List<String> users4 = new ArrayList<>();
         users4.add("a");
@@ -182,6 +179,17 @@ public class DemoApplication {
         tasks3.add("6");
         tasks3.add("7");
         tasks3.add("8");
+        tasks3.add("9");
+
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(5);
+        list2.add(5);
+        list2.add(5);
+        list2.add(4);
+        list2.add(4);
+        list2.forEach(m -> System.out.println("原数据为：" + m));
+        Collections.sort(list2);
+        list2.forEach(m -> System.out.println("排序数据为：" + m));
 
 
         Map<String, List<String>> map2 = Distribution.allotOfAverage(users4, Distribution.getTasks(tasks3));

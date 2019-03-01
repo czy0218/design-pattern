@@ -111,7 +111,6 @@ public class Distribution {
         }
         return stringList;
     }
-
     /*
      * 全部分配
      * */
