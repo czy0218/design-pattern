@@ -16,4 +16,6 @@ public class Hungry {
     public static Hungry getHungry() {
         return HUNGRY;
     }
+
+
 }
