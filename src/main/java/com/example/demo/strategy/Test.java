@@ -2,6 +2,7 @@ package com.example.demo.strategy;
 
 /**
  * Created by czy0218 on 2020/3/8.
+ * 策略
  */
 public class Test {
     public static void main(String[] args) {
